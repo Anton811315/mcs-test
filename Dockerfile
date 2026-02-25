@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the MCP server code into the container
-COPY mcp_server.py /app/mcp_server.py
+COPY mcp-server.py /app/mcp-server.py
 
 # Install any required Python dependencies (if you have a requirements.txt)
 # Uncomment the following lines if you have dependencies
