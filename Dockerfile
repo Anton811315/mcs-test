@@ -25,7 +25,7 @@ RUN addgroup --system --gid 1001 pythonusers && \
 RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
     echo 'set -e' >> /app/entrypoint.sh && \
     echo 'echo "Starting MCP Server on $HOST:$PORT"' >> /app/entrypoint.sh && \
-    echo 'exec python /app/mcp_server.py $HOST $PORT' >> /app/entrypoint.sh && \
+    echo 'exec python /app/mcp-server.py $HOST $PORT' >> /app/entrypoint.sh && \
     chmod +x /app/entrypoint.sh && \
     chown -R mcp:pythonusers /app
 
