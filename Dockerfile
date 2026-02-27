@@ -7,12 +7,7 @@ WORKDIR /app
 # Copy the MCP server code into the container
 COPY mcp-server.py /app/mcp-server.py
 
-# Install any required Python dependencies (if you have a requirements.txt)
-# Uncomment the following lines if you have dependencies
-# COPY requirements.txt /app/requirements.txt
-# RUN pip install --no-cache-dir -r requirements.txt
-
-# Set environment variables for configuration (if needed)
+# Set environment variables for configuration
 ENV HOST=127.0.0.1
 ENV PORT=65432
 
@@ -24,7 +19,7 @@ RUN addgroup --system --gid 1001 pythonusers && \
 # Create an entrypoint script to start the MCP server
 RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
     echo 'set -e' >> /app/entrypoint.sh && \
-    echo 'echo "{\"jsonrpc\": \"2.0\", \"method\": \"start\", \"params\": {\"host\": \"$HOST\", \"port\": \"$PORT\"}, \"id\": 1}"' >> /app/entrypoint.sh && \
+    echo 'echo "{\"jsonrpc\": \"2.0\", \"method\": \"ping\", \"params\": {}, \"id\": 1}"' >> /app/entrypoint.sh && \
     echo 'exec python /app/mcp-server.py $HOST $PORT' >> /app/entrypoint.sh && \
     chmod +x /app/entrypoint.sh && \
     chown -R mcp:pythonusers /app
