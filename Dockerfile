@@ -19,7 +19,7 @@ RUN addgroup --system --gid 1001 pythonusers && \
 # Create an entrypoint script to start the MCP server
 RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
     echo 'set -e' >> /app/entrypoint.sh && \
-    echo 'echo "{\"jsonrpc\": \"2.0\", \"method\": \"ping\", \"params\": {}, \"id\": 1}"' >> /app/entrypoint.sh && \
+    echo 'echo "{\"jsonrpc\": \"2.0\", \"method\": \"elicitation/create\", \"params\": {\"ElicitRequestURLParams\": {\"elicitationId\": \"12345\", \"message\": \"Hello\", \"url\": \"http://example.com\", \"requestedSchema\": \"schema_v1\"}}, \"id\": 1}"' >> /app/entrypoint.sh && \
     echo 'exec python /app/mcp-server.py $HOST $PORT' >> /app/entrypoint.sh && \
     chmod +x /app/entrypoint.sh && \
     chown -R mcp:pythonusers /app
